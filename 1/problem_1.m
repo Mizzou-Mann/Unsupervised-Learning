@@ -2,7 +2,7 @@
 % CS 8735: Supervised Learning Fall (2015)
 %     Unversity of Missouri-Columbia
 %           Chanmann Lim
-%        September 17, 2015
+%          September 2015
 % ----------------------------------------
 clc;
 clear;
@@ -19,6 +19,8 @@ prior = 1/4 * ones(1, 4);
 mu = { [10; 2], [5; 6], [0; 1], [4; 3] };
 Sigma = { eye(2), eye(2), eye(2), eye(2) };
 
-tic;
 [prior, mu, Sigma] = EM(X, T, prior, mu, Sigma);
-toc
+
+display(prior);
+display(cell2mat(mu));
+display(cell2mat(Sigma));
