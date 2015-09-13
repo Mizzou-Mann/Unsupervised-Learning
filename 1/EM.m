@@ -1,4 +1,4 @@
-function [ prior, mu, Sigma ] = EM( X, T, prior, mu, Sigma )
+function [ prior, Mu, Sigma ] = EM( X, T, prior, Mu, Sigma )
 %EM - run EM algorithm for T iterations
 
 [~, K] = size(prior);
@@ -8,13 +8,13 @@ t = 0;
 while t < T
     for k=1:K
         % Expectation step
-        g = gamma_nk(X, k, prior, mu, Sigma);
+        g = gamma_nk(X, k, prior, Mu, Sigma);
         Nk = sum(g);
         
         % Maximization step
-        mu{k} = 1/Nk * sum(g*ones(1, 2) .* X)';
-        X_tilde = X' - mu{k}*ones(1,N);
-        Sigma{k} = 1/Nk *  (ones(2,1)*g' .* X_tilde * X_tilde');
+        Mu(:,k) = 1/Nk * sum(g*ones(1, 2) .* X)';
+        X_tilde = X' - Mu(:,k)*ones(1,N);
+        Sigma(:,k) = vectorize_sigma( 1/Nk *  (ones(2,1)*g' .* X_tilde * X_tilde') );
         prior(k) = Nk / N;
     end
 

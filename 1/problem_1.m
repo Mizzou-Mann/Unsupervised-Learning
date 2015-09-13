@@ -16,11 +16,13 @@ T = 100; % 100 iterations
 
 % Initialization
 prior = 1/4 * ones(1, 4);
-mu = { [10; 2], [5; 6], [0; 1], [4; 3] };
-Sigma = { eye(2), eye(2), eye(2), eye(2) };
+Mu = [ [10; 2], [5; 6], [0; 1], [4; 3] ];
+Sigma = [[1; 0; 1], [1; 0; 1], [1; 0; 1], [1; 0; 1] ];
 
-[prior, mu, Sigma] = EM(X, T, prior, mu, Sigma);
+tic;
+[prior, Mu, Sigma] = EM(X, T, prior, Mu, Sigma);
+toc
 
 display(prior);
-display(cell2mat(mu));
-display(cell2mat(Sigma));
+display(Mu);
+display(Sigma);

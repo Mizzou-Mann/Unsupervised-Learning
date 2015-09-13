@@ -35,20 +35,27 @@ After the EM procedure terminated, we got
 \begin{equation}
 	\hat{\pi}_1 = 0.3457, \hat{\pi}_2 = 0.1401, \hat{\pi}_3 = 0.1847, \hat{\pi}_4 = 0.3295\\
 \end{equation}
-\begin{equation}
-	\hat{\mu}_1 = \begin{bmatrix} 13.0263 \\3.0455 \end{bmatrix},
-	\hat{\mu}_2 = \begin{bmatrix} 4.0619 \\ 7.9674 \end{bmatrix}, 
-	\hat{\mu}_3 = \begin{bmatrix} 1.6026 \\ 1.5717 \end{bmatrix}, 
-	\hat{\mu}_4 = \begin{bmatrix} 6.9183 \\ 5.9843 \end{bmatrix}
-\end{equation}
-\begin{equation}
-	\hat{\Sigma}_1 = \begin{bmatrix} 6.9183 & 5.9843 \\ -0.7471 & 2.0688 \end{bmatrix},
-	\hat{\Sigma}_2 = \begin{bmatrix} 0.8788 & 0.2342 \\ 0.2342 & 1.1568 \end{bmatrix},
-\end{equation}
-\begin{equation}
-	\hat{\Sigma}_3 = \begin{bmatrix} 8.4468 & -0.0635 \\ -0.0635 & 1.0938 \end{bmatrix},
-	\hat{\Sigma}_4 = \begin{bmatrix} 6.2731 & 2.6295 \\ 2.6295 & 1.9615 \end{bmatrix}
-\end{equation}
+\begin{align}
+	\mathbf{\hat{U}} &= \begin{bmatrix}
+							\hat{\mu}_1 & \hat{\mu}_2 & \hat{\mu}_3 & \hat{\mu}_4 
+						\end{bmatrix} \\
+					 & = \begin{bmatrix}
+							13.0263  &  4.0619  &  1.6026  &  6.9183 \\
+    						3.0455  &  7.9674  &  1.5717  &  5.9843
+						 \end{bmatrix}
+\end{align}
+\begin{align}
+	\mathbf{\hat{\Sigma}} &= \begin{bmatrix}
+								\hat{\Sigma}_1 & \hat{\Sigma}_2 & \hat{\Sigma}_3 & \hat{\Sigma}_4 
+							 \end{bmatrix} \\
+						  & = \begin{bmatrix}
+									1.6470  &  0.8788  &  8.4468  &  6.2731 \\
+								   -0.7471  &  0.2342  & -0.0635  &  2.6295 \\
+								    2.0688  &  1.1568  &  1.0938  &  1.9615
+						 	  \end{bmatrix}
+\end{align}
+
+Where, $\hat{\Sigma_k}$ is the upper triangular values for covariance matrix of the $k^{th}$ Gaussian component. $$1 \le k \le 4$$
 
 \newpage
 \subsection*{Appendix:}
