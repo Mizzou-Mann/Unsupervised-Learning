@@ -1,0 +1,59 @@
+% assignment_1.tex
+% CS 8735 - Unsupervised Learning (Fall 2015)
+%     University of Missouri-Columbia
+%             Chanmann Lim
+%            September 2015
+
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1 in]{geometry}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{float}
+
+\everymath{\displaystyle}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+
+\begin{document}
+\title{CS 8735: Report for assignment 1}
+\author{Chanmann Lim}
+\date{September 17, 2015}
+\maketitle
+
+\paragraph{Problem 1.} In this task, we are given a dataset generated from a mixture density and the job is to implement EM algorithm to learn the parameters of the model. Based on the assumption that the Gaussian Mixture Model has four component Gaussian PDFs with each having a full covariance matrix we will terminate the our EM estimation at the 100\textsuperscript{th} iterations. \\
+
+\noindent The Matlab code for the experiment is in the \textbf{Appendix} section.
+
+\paragraph{a) } For the first experiment which we named it case \textbf{a}, we run EM procedure with the initialization suggested in the assignment.
+
+$$ \pi_k^{(0)} = 1/4 \qquad 1 \le k \le 4 $$
+$$ \mu_1^{(0)} = [10\;2]^T, \mu_2^{(0)} = [5\;6]^T, \mu_3^{(0)} = [0\;1]^T, \mu_4^{(0)} = [4\;3]^T $$
+$$ \Sigma_k^{(0)} = \mathbf{I}_{2\times2} \qquad 1 \le k \le 4 $$
+
+After the EM procedure terminated, we got
+
+\begin{equation}
+	\hat{\pi}_1 = 0.3457, \hat{\pi}_2 = 0.1401, \hat{\pi}_3 = 0.1847, \hat{\pi}_4 = 0.3295\\
+\end{equation}
+\begin{equation}
+	\hat{\mu}_1 = \begin{bmatrix} 13.0263 \\3.0455 \end{bmatrix},
+	\hat{\mu}_2 = \begin{bmatrix} 4.0619 \\ 7.9674 \end{bmatrix}, 
+	\hat{\mu}_3 = \begin{bmatrix} 1.6026 \\ 1.5717 \end{bmatrix}, 
+	\hat{\mu}_4 = \begin{bmatrix} 6.9183 \\ 5.9843 \end{bmatrix}
+\end{equation}
+\begin{equation}
+	\hat{\Sigma}_1 = \begin{bmatrix} 6.9183 & 5.9843 \\ -0.7471 & 2.0688 \end{bmatrix},
+	\hat{\Sigma}_2 = \begin{bmatrix} 0.8788 & 0.2342 \\ 0.2342 & 1.1568 \end{bmatrix},
+\end{equation}
+\begin{equation}
+	\hat{\Sigma}_3 = \begin{bmatrix} 8.4468 & -0.0635 \\ -0.0635 & 1.0938 \end{bmatrix},
+	\hat{\Sigma}_4 = \begin{bmatrix} 6.2731 & 2.6295 \\ 2.6295 & 1.9615 \end{bmatrix}
+\end{equation}
+
+\newpage
+\subsection*{Appendix:}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_1.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{EM.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{gamma_nk.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{mvnpdf.m}
+\end{document}
