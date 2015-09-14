@@ -1,8 +1,10 @@
-function [ prior, Mu, Sigma ] = EM( X, T, prior, Mu, Sigma )
+function [ prior, Mu, Sigma, scores ] = EM( X, T, prior, Mu, Sigma )
 %EM - run EM algorithm for T iterations
 
 [~, K] = size(prior);
 [N, ~] = size(X);
+% Log likelihood scores
+scores = zeros(1, T);
 
 t = 0;
 while t < T
@@ -21,6 +23,7 @@ while t < T
     % Check for convergence
     % We're assuming that EM algorithm will converge in T iteration
     t = t + 1;
+    scores(t) = log_P(X, prior, Mu, Sigma);
 end
 
 

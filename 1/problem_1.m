@@ -20,9 +20,17 @@ Mu = [ [10; 2], [5; 6], [0; 1], [4; 3] ];
 Sigma = [[1; 0; 1], [1; 0; 1], [1; 0; 1], [1; 0; 1] ];
 
 tic;
-[prior, Mu, Sigma] = EM(X, T, prior, Mu, Sigma);
+[prior, Mu, Sigma, scores] = EM(X, T, prior, Mu, Sigma);
 toc
 
+% Estimated parameters
 display(prior);
 display(Mu);
 display(Sigma);
+
+% Plot of log likelihood scores
+figure;
+plot(1:T, scores);
+title(['Log likelihood (' num2str(T) ') iterations']);
+xlabel('Iteration');
+ylabel('log P(X|\Theta)');

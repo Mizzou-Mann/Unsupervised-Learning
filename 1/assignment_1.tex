@@ -9,6 +9,7 @@
 \usepackage[margin=1 in]{geometry}
 \usepackage{listings}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{float}
 
 \everymath{\displaystyle}
@@ -56,6 +57,15 @@ After the EM procedure terminated, we got
 \end{align}
 
 Where, $\hat{\Sigma_k}$ is the upper triangular values for covariance matrix of the $k^{th}$ Gaussian component. $$1 \le k \le 4$$
+
+Figure ~\ref{fig:log_likelihood_a} shows that EM has converged at around the 80\textsuperscript{th} iteration.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/log_likelihood_scores.png}
+  \caption{Log likelihood scores for case \textbf{a}}
+  \label{fig:log_likelihood_a}
+\end{figure}
 
 \newpage
 \subsection*{Appendix:}
