@@ -89,10 +89,61 @@ $$ k^* = \argmax_{1 \le k \le 4} P(z_n=k|x_n;\Theta^{(t)}) $$
   \caption{Plot of the four clusters at t=100}
 \end{figure}
 
+\paragraph{b) } For the second experiment(case \textbf{b}) with the same dataset we are going to use a different initialization for the parameters $\Theta^{(0)} = \{ \pi^{(0)}, \mu^{(0)}, \Sigma^{(0)} \}$ under the same assumption that the data comes from	four components gaussian mixture model and EM procedure will converge at the 100\textsuperscript{th} iterations.\\
+
+The plot of the data will actually help reveal its natural grouping to some extent before our blind guess and this is especially true for two dimensional dataset like in this problem.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/GMD_dat.png}
+  \caption{Plot of GMD.dat}
+  \label{fig:GMD.dat}
+\end{figure}
+
+And from Figure ~\ref{fig:GMD.dat} we comes up with $\Theta^{(0)}$ as the following:
+
+$$ \pi_1^{(0)} = 0.25, \pi_2^{(0)} = 0.2, \pi_3^{(0)} = 0.25, \pi_4^{(0)} = 0.3 $$
+$$ \mu_1^{(0)} = [1\quad2]^T, \mu_2^{(0)} = [4\quad8]^T, \mu_3^{(0)} = [8\quad6.5]^T, \mu_4^{(0)} = [13.5\quad3]^T $$
+$$ \Sigma_k^{(0)} = \mathbf{I}_{2\times2} \qquad 1 \le k \le 4 $$
+
+Empirically we can select several points closed to each already chosen $\mu_k^{(0)}$ at random to compute for the covariance matrix $\Sigma$ however that wouldn't guarantee to give measurable accuracy then any purely random guess covariance matrix than using the same covariance matrix $\Sigma_k^{(0)} = \mathbf{I}_{2\times2}$ as in case \textbf{a} will be as satisfactory.\\
+
+And the EM procedure terminated with
+
+\begin{equation}
+	\hat{\pi}_1 = 0.1847, \hat{\pi}_2 = 0.1401, \hat{\pi}_3 = 0.3295, \hat{\pi}_4 = 0.3457\\
+\end{equation}
+\begin{align}
+	\mathbf{\hat{U}} &= \begin{bmatrix}
+							\hat{\mu}_1 & \hat{\mu}_2 & \hat{\mu}_3 & \hat{\mu}_4 
+						\end{bmatrix} \\
+					 & = \begin{bmatrix}
+							1.6026  &  4.0619  &  6.9182  & 13.0263\\
+						    1.5717  &  7.9675  &  5.9843  &  3.0455
+						 \end{bmatrix}
+\end{align}
+\begin{align}
+	\mathbf{\hat{\Sigma}} &= \begin{bmatrix}
+								\hat{\Sigma}_1 & \hat{\Sigma}_2 & \hat{\Sigma}_3 & \hat{\Sigma}_4 
+							 \end{bmatrix} \\
+						  & = \begin{bmatrix}
+									8.4468  &  0.8788  &  6.2733  &  1.6470 \\
+								   -0.0635  &  0.2342  &  2.6295  & -0.7471 \\
+								    1.0938  &  1.1568  &  1.9615  &  2.0688
+						 	  \end{bmatrix}
+\end{align}
+
 \newpage
 \subsection*{Appendix:}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_1.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_1_a.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_1_b.m}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{EM.m}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{gamma_nk.m}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{mvnpdf.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{log_P.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{sigma_d.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{vectorize_sigma.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{classify.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{clusters_plot.m}
 \end{document}
