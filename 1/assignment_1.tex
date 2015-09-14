@@ -67,6 +67,28 @@ Figure ~\ref{fig:log_likelihood_a} shows that EM has converged at around the 80\
   \label{fig:log_likelihood_a}
 \end{figure}
 
+To see the effect of EM algorithm visually we assign each data point to one of the four clusters $k = 1,2,3,4$ using the maximum posterior probability rule then plot three separate graphs for $t = 10,50,100$.
+
+$$ k^* = \argmax_{1 \le k \le 4} P(z_n=k|x_n;\Theta^{(t)}) $$
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/clusters_t_10.png}
+  \caption{Plot of the four clusters at t=10}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/clusters_t_50.png}
+  \caption{Plot of the four clusters at t=50}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/clusters_t_100.png}
+  \caption{Plot of the four clusters at t=100}
+\end{figure}
+
 \newpage
 \subsection*{Appendix:}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_1.m}
