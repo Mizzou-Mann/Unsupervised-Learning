@@ -7,10 +7,11 @@ function clusters_plot( X, k, t )
 
 colors = 'bgrm';
 figure;
+hold on;
 for j=unique(k)'
     x1 = X(:,1); x1 = x1(k == j);
     x2 = X(:,2); x2 = x2(k == j);
-    scatter(x1, x2, colors(j)); hold on;
+    scatter(x1, x2, 'filled', colors(j));
 end
 hold off;
 title(['Plot of clusters at t=' num2str(t)]);

@@ -34,5 +34,3 @@ while t < T
     
     scores(t) = log_P(X, prior, Mu, Sigma);
 end
-
-

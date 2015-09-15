@@ -8,11 +8,10 @@ clc;
 clear;
 close all;
 
-%% Load data
+%% Problem 1
+% Load data
 X = load('GMD.dat');
 
-%% EM algorithm
-T = 100; % 100 iterations
-
-% problem_1_a
+% EM algorithm
+problem_1_a
 problem_1_b

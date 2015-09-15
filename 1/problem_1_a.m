@@ -1,3 +1,4 @@
+T = 100; % 100 iterations
 % Initialization
 prior = 1/4 * ones(1, 4);
 Mu = [ [10; 2], [5; 6], [0; 1], [4; 3] ];
