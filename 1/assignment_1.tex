@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{multirow}
 
 \everymath{\displaystyle}
 \DeclareMathOperator*{\argmax}{\arg\!\max}
@@ -21,9 +22,9 @@
 \date{September 17, 2015}
 \maketitle
 
-\paragraph{Problem 1.} In this task, we are given a dataset generated from a mixture density and the job is to implement EM algorithm to learn the parameters of the model. Based on the assumption that the Gaussian Mixture Model has four component Gaussian PDFs with each having a full covariance matrix we will terminate the our EM estimation at the 100\textsuperscript{th} iterations. \\
+\noindent The Matlab code for all experiments is in the \textbf{Appendix} section.
 
-\noindent The Matlab code for the experiment is in the \textbf{Appendix} section.
+\paragraph{Problem 1.} In this task, we are given a dataset generated from a mixture density and the job is to implement EM algorithm to learn the parameters of the model. Based on the assumption that the Gaussian Mixture Model has four component Gaussian PDFs with each having a full covariance matrix we will terminate the our EM estimation at the 100\textsuperscript{th} iterations. \\
 
 \paragraph{a) } For the first experiment which we named it case \textbf{a}, we run EM procedure with the initialization suggested in the assignment.
 
@@ -133,7 +134,78 @@ And the EM procedure terminated with
 						 	  \end{bmatrix}
 \end{align}
 
-\paragraph{Problem 2.} 
+\paragraph{Problem 2.} From the coin-tossing example discussed in class we know that there are two coins(A and B) equally likely to be selected at random to perform the tossing experiment which produced the following outcome. \\
+
+\begin{center}
+  \begin{tabular}{  r | c | c }
+                 & Coin A & Coin B \\ \hline
+    $\mathbf{x_1}$ &        & 5H, 5T \\ 
+    $\mathbf{x_2}$ & 9H, 1T &        \\ 
+    $\mathbf{x_3}$ & 8H, 2T &        \\ 
+    $\mathbf{x_4}$ &        & 4H, 6T \\ 
+    $\mathbf{x_5}$ & 7H, 3T &        
+  \end{tabular}
+\end{center}
+
+And
+
+$$ P(z = A) = P(z = B) = 0.5 $$
+$$ \theta_A = P(H|z=A), \quad \theta_B = P(H|z=B)  $$
+
+For this task we begin with $\theta^{(0)} = (\theta^{(0)}_A, \theta^{(0)}_B) = (0.6, 0.4)$ and terminate the EM procedure at the 10\textsuperscript{th} iterations. We obtain the estimate of the parameters for $t = 1,2,\cdots,10$ as the following: \\
+
+\begin{tabular}{ | r | c c c c c c c c c c | }
+	\hline
+	t & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
+	$\theta_A^{(t)}$ & 0.7261  &  0.7680  &  0.7852  &  0.7923  &  0.7951  &  0.7961  &  0.7965  &  0.7967  &  0.7968  &  0.7968 \\
+	$\theta_B^{(t)}$ & 0.5020  &  0.5194  &  0.5208  &  0.5203  &  0.5199  &  0.5197  &  0.5196  &  0.5196  &  0.5196  &  0.5196 \\ \hline
+\end{tabular}
+
+~\\
+
+Now with the estimated parameters $\theta_A^{(t)}$ and $\theta_B^{(t)}$ we can compute the posterior probability $P(z^n = A|x^n; \theta^{(t)})$ and $P(z^n = B|x^n; \theta^{(t)})$ using Bayes rule:
+
+\begin{equation}
+	P(z^n = A|x^n; \theta^{(t)}) = \frac{P(z^n = A) \cdot P(x^n|z^n = A; \theta^{(t)})}{P(x^n; \theta^{(t)})}
+\end{equation}
+
+And $P(x^n; \theta^{(t)})$ can be obtained by marginalizing over $z^n$ using the sum rule: 
+
+\begin{equation}
+	P(x^n; \theta^{(t)}) = P(z^n = A) \cdot P(x^n|z^n = A; \theta^{(t)}) + P(z^n = B) \cdot P(x^n|z^n = B; \theta^{(t)})
+\end{equation}
+
+\begin{center}
+\begin{tabular}{ | c | c | c | c | }
+	\hline
+	& $x^n$ & $P(z^n=A|x^n; \theta^{(t)})$ & $P(z^n=B|x^n; \theta^{(t)})$ \\ \hline
+	\multirow{5}{*}{t=1} & 5H, 5T & 0.2416 & 0.7584 \\
+		& 9H, 1T & 0.9384 & 0.0616 \\
+		& 8H, 2T & 0.8528 & 0.1472 \\
+		& 4H, 6T & 0.1080 & 0.8920 \\
+		& 7H, 3T & 0.6878 & 0.3122 \\ \hline
+    \multirow{5}{*}{t=10} & 5H, 5T & 0.1030 & 0.8970 \\
+    	& 9H, 1T & 0.9520 & 0.0480 \\
+    	& 8H, 2T & 0.8455 & 0.1545 \\
+    	& 4H, 6T & 0.0307 & 0.9693 \\
+    	& 7H, 3T & 0.6015 & 0.3985 \\ \hline
+\end{tabular}
+\end{center}
+
+We get 
+
+\begin{equation}
+	\log P(X; \theta^{(t)}) = \sum_{n=1}^5 \log P(x^n; \theta^{(t)})
+\end{equation}
+
+The plot of $\log P(X; \theta^{(t)})$ is shown in Figure ~\ref{fig:log_P_X}.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/log_P_X.png}
+  \caption{Plot of $\log P(X; \theta^{(t)})$}
+  \label{fig:log_P_X}
+\end{figure}
 
 \newpage
 \subsection*{Appendix:}
@@ -148,4 +220,7 @@ And the EM procedure terminated with
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{vectorize_sigma.m}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{classify.m}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{clusters_plot.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{problem_2.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{EM_2.m}
+	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{bernoulli.m}
 \end{document}

@@ -6,7 +6,8 @@ T = 10; % 10 iterations
 % Initialization
 % theta = [theta_A, theta_B]
 theta_0 = [0.6 0.4];
-[Theta, P] = EM_2(X, T, theta_0);
+prior = 0.5;
+[Theta, P] = EM_2(X, T, prior, theta_0);
 
 % Learned parameters t=1..10
 display(Theta);

@@ -1,9 +1,9 @@
-function [ Theta, P ] = EM_2( X, T, theta )
-% EM_2 
+function [ Theta, P ] = EM_2( X, T, prior, theta )
+% EM_2 - EM procedure for problem 2
 
-% Paramaters for t=1..T
+% Paramaters for t = 1..T
 Theta = zeros(T, length(theta));
-% P(z,X;theta)
+% P(z,x;theta) - the joint probability of z and x
 P = cell(1, T);
 
 t = 0;
@@ -22,5 +22,5 @@ while t < T
     
     % Store Theta(t=1..T)
     Theta(t,:) = theta;
-    P{t} = 0.5 * [bernoulli(X, theta(1)), bernoulli(X, theta(2))];
+    P{t} = prior * [bernoulli(X, theta(1)), bernoulli(X, theta(2))];
 end
