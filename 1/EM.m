@@ -2,7 +2,7 @@ function [ Prior, MU, SIGMA, scores ] = EM( X, T, prior, Mu, Sigma )
 %EM - run EM algorithm for T iterations
 
 [~, K] = size(prior);
-[N, ~] = size(X);
+[N, d] = size(X);
 % Theta(t=1..T)
 Prior = cell(1, T);
 MU = cell(1, T);
@@ -12,15 +12,16 @@ scores = zeros(1, T);
 
 t = 0;
 while t < T
+    Gamma = gamma_nk(X, prior, Mu, Sigma);
     for k=1:K
         % Expectation step
-        g = gamma_nk(X, k, prior, Mu, Sigma);
+        g = Gamma(:,k) ./ sum(Gamma, 2);
         Nk = sum(g);
         
         % Maximization step
-        Mu(:,k) = 1/Nk * sum(g*ones(1, 2) .* X)';
+        Mu(:,k) = 1/Nk * X' * g;
         X_tilde = X' - Mu(:,k)*ones(1,N);
-        Sigma(:,k) = vectorize_sigma( 1/Nk *  (ones(2,1)*g' .* X_tilde * X_tilde') );
+        Sigma(:,k) = vectorize_sigma( 1/Nk *  (ones(d,1)*g' .* X_tilde * X_tilde') );
         prior(k) = Nk / N;
     end
 

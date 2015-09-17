@@ -7,6 +7,7 @@ Sigma = [[1; 0; 1], [1; 0; 1], [1; 0; 1], [1; 0; 1] ];
 [Prior, MU, SIGMA, scores] = EM(X, T, prior, Mu, Sigma);
 
 % Estimated parameters
+display('Final estimated parameter:');
 display(Prior{T});
 display(MU{T});
 display(SIGMA{T});

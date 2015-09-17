@@ -35,15 +35,15 @@ $$ \Sigma_k^{(0)} = \mathbf{I}_{2\times2} \qquad 1 \le k \le 4 $$
 After the EM procedure terminated, we got
 
 \begin{equation}
-	\hat{\pi}_1 = 0.3457, \hat{\pi}_2 = 0.1401, \hat{\pi}_3 = 0.1847, \hat{\pi}_4 = 0.3295\\
+	\hat{\pi}_1 = 0.3459, \hat{\pi}_2 = 0.1412, \hat{\pi}_3 = 0.1850, \hat{\pi}_4 = 0.3280\\
 \end{equation}
 \begin{align}
 	\mathbf{\hat{U}} &= \begin{bmatrix}
 							\hat{\mu}_1 & \hat{\mu}_2 & \hat{\mu}_3 & \hat{\mu}_4 
 						\end{bmatrix} \\
 					 & = \begin{bmatrix}
-							13.0263  &  4.0619  &  1.6026  &  6.9183 \\
-    						3.0455  &  7.9674  &  1.5717  &  5.9843
+							13.0253  &  4.0666  &  1.6031  &  6.9285 \\
+						    3.0467   & 7.9557  &  1.5747  &  5.9848
 						 \end{bmatrix}
 \end{align}
 \begin{align}
@@ -51,15 +51,15 @@ After the EM procedure terminated, we got
 								\hat{\Sigma}_1 & \hat{\Sigma}_2 & \hat{\Sigma}_3 & \hat{\Sigma}_4 
 							 \end{bmatrix} \\
 						  & = \begin{bmatrix}
-									1.6470  &  0.8788  &  8.4468  &  6.2731 \\
-								   -0.7471  &  0.2342  & -0.0635  &  2.6295 \\
-								    2.0688  &  1.1568  &  1.0938  &  1.9615
+								    1.6491  &  0.8845  &  8.4402  &  6.2493 \\
+								   -0.7494  &  0.2297  & -0.0623  &  2.6326 \\
+								    2.0717  &  1.1715  &  1.0987  &  1.9615
 						 	  \end{bmatrix}
 \end{align}
 
 Where, $\hat{\Sigma_k}$ is the upper triangular values for covariance matrix of the $k^{th}$ Gaussian component. $$1 \le k \le 4$$
 
-Figure ~\ref{fig:log_likelihood_a} shows that EM has converged at around the 80\textsuperscript{th} iteration.
+Figure ~\ref{fig:log_likelihood_a} shows that EM has converged after the 97\textsuperscript{th} iteration.
 
 \begin{figure}[H]
   \centering
@@ -133,6 +133,15 @@ And the EM procedure terminated with
 								    1.0938  &  1.1568  &  1.9615  &  2.0688
 						 	  \end{bmatrix}
 \end{align}
+
+As shown in Figure ~\ref{fig:log_likelihood_b} good initialization will lead to faster convergence. \\
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=.57]{images/log_likelihood_scores_b.png}
+  \caption{Log likelihood scores for case \textbf{b}}
+  \label{fig:log_likelihood_b}
+\end{figure}
 
 \paragraph{Problem 2.} From the coin-tossing example discussed in class we know that there are two coins(A and B) equally likely to be selected at random to perform the tossing experiment which produced the following outcome. \\
 
