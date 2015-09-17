@@ -207,6 +207,49 @@ The plot of $\log P(X; \theta^{(t)})$ is shown in Figure ~\ref{fig:log_P_X}.
   \label{fig:log_P_X}
 \end{figure}
 
+\paragraph{Problem 3.} Derive the EM estimation for two-dimensional Gaussian Mixture Density parameters $\hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k$ for $k = 1,2,\cdots,K$ given that $\Sigma_1 = \Sigma_2 = \cdots = \Sigma_K = \Sigma$. In EM algorithm we are maximizing $Q(\Theta, \Theta') = \mathbf{E} [ \log P(\mathbf{X}, Z; \Theta) | \mathbf{X}, \Theta']$ with respect to $\pi_k, \mu_k, \text{ and } \Sigma_k$ and according to the discussion in class and the constraints given here we get:
+
+\begin{equation}
+	Q(\Theta, \Theta') = \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' \left( \log \pi_k - \log 2\pi - \frac{1}{2}\log |\Sigma| - \frac{1}{2}(x_n-\mu_k)^T\Sigma^{-1}(x_n-\mu_k) \right)
+\end{equation}
+
+Where $\gamma_{n,k}' = P(z_n=k|x_n; \Theta')$
+
+\begin{equation}
+	\gamma_{n,k}' = \frac{\pi_k'N(x_n;\mu_k', \Sigma')}{\sum_{j=1}^K \pi_k'N(x_n;\mu_k', \Sigma')}
+\end{equation}	
+
+Then
+
+\begin{align}
+	Q_{\mu} &= -\frac{1}{2} \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' (x_n-\mu_k)^T\Sigma^{-1}(x_n-\mu_k) \\
+	\frac{\partial Q_{\mu}}{\partial \mu_k} &= \Sigma^{-1} \sum_{n=1}^N \gamma_{n,k}' (x_n-\mu_k)\\
+	\sum_{n=1}^N \gamma_{n,k}' x_n - \sum_{n=1}^N \gamma_{n,k}' \hat{\mu}_k &= 0 \\
+	\hat{\mu}_k &= \frac{1}{\sum_{n=1}^N \gamma_{n,k}'} \sum_{n=1}^N \gamma_{n,k}' x_n
+\end{align}
+
+And
+
+\begin{align}
+	Q_{\Sigma} &= -\frac{1}{2} \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' \left(\log |\Sigma| + (x_n-\mu_k)^T\Sigma^{-1}(x_n-\mu_k) \right) \\
+		&= -\frac{1}{2}\left(\log |\Sigma| \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' + \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' (x_n-\mu_k)^T\Sigma^{-1}(x_n-\mu_k) \right) \\
+		&= -\frac{1}{2}\left(N\log |\Sigma| + \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' (x_n-\mu_k)^T\Sigma^{-1}(x_n-\mu_k) \right) \\
+		\frac{\partial Q_{\Sigma}}{\partial \Sigma^{-1}} &= -\frac{1}{2}\left( -N\Sigma + \sum_{n=1}^N (x_n-\mu_k)(x_n-\mu_k)^T \right) \\
+		-N\hat{\Sigma} + \sum_{n=1}^N (x_n-\mu_k)(x_n-\mu_k)^T &= 0 \\
+		\hat{\Sigma} &= \frac{1}{N} \sum_{n=1}^N (x_n-\mu_k)(x_n-\mu_k)^T
+\end{align}
+
+And
+
+\begin{align}
+	Q_{\pi} &= \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' \log \pi_k + \lambda(\sum_{k=1}^K \pi_k-1) \\
+	\frac{\partial Q_{\pi}}{\partial \pi_k} &= \sum_{n=1}^N \gamma_{n,k}' \frac{1}{\pi_k} + \lambda \\
+	\sum_{n=1}^N \gamma_{n,k}' + \lambda \hat{\pi}_k &= 0, \quad \sum_{n=1}^N \sum_{k=1}^K \gamma_{n,k}' + \lambda \sum_{k=1}^K \pi_k = 0 \\
+	\hat{\pi}_k &= \frac{1}{N} \sum_{n=1}^N \gamma_{n,k}'
+\end{align}
+
+
+
 \newpage
 \subsection*{Appendix:}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{assignment_1.m}
