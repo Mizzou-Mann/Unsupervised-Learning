@@ -13,7 +13,5 @@ close all;
 X = load('GMD.dat');
 
 % EM algorithm
-tic;
 problem_1_a
-toc
-% problem_1_b
+problem_1_b
