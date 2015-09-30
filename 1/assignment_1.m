@@ -15,3 +15,4 @@ X = load('GMD.dat');
 % EM algorithm
 problem_1_a
 problem_1_b
+problem_2
