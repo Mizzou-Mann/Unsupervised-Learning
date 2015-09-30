@@ -10,6 +10,7 @@ function [ d, k ] = min_distance( x, C )
     [d, k] = min(D);
 end
 
+% Euclidean distance between x and y
 function [ d ] = d2(x, y)
     x_tilte = x - y;
     d = sqrt(x_tilte * x_tilte');
