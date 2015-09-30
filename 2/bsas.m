@@ -22,6 +22,7 @@ for i=2:N
         nc = length(C{ck});
         C{ck} = [C{ck} i];
         % update representative
+        % mc_new = (nc*mc+x) / (nc+1)
         R(ck,:) = (nc*R(ck,:) + X(i,:)) / (nc+1);
     end
 end
