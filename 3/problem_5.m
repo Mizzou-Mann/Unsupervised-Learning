@@ -8,7 +8,8 @@ m = 2;
 T = 5;
 % fuzzifier
 q = 2;
-% cluster representative
+
+% initialization
 c = [[-1 0]' [0 1]'];
 Sigma = [sigma2vec(eye(2)) sigma2vec(eye(2))];
 
