@@ -1,4 +1,3 @@
-clc; clear all; close all;
 % load data
 X = load('../1/GMD.dat');
 
