@@ -17,9 +17,9 @@ Sigma = [sigma2vec(eye(2)) sigma2vec(eye(2))];
 [C, SIGMA, total_distance] = gustafson_kessel(X, c, Sigma, q, T);
 
 % result
-fprintf('c = \n\n');
+fprintf('c(5) = \n\n');
 disp(C{T});
-fprintf('Sigma = \n\n');
+fprintf('Sigma(5) = \n\n');
 disp(SIGMA{T});
 display(total_distance);
 

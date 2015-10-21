@@ -6,20 +6,24 @@ m = 4;
 % fuzzifier
 q = 2;
 
-[~,d] = size(X);
+[~,l] = size(X);
 % initialization
-% Theta = rand(d,m);
+% Theta = rand(l,m);
 Theta = [0.7802    0.6079    0.1048    0.5495 
     			0.3376    0.7413    0.1279    0.4852];
 display('Random initialization:');
-display(Theta);
+fprintf('Theta(0) = \n\n');
+disp(Theta);
 
-[I, Theta, distortion] = fuzzy_c_mean(X, Theta, q);
+[Theta, distortion] = fuzzy_c_mean(X, Theta, q);
+I = fcm_cluster_assignment(X, Theta);
 
 % result
 display('Result:');
-display(Theta);
+fprintf('Theta(%d) = \n\n', length(distortion));
+disp(Theta);
 display(distortion);
+
 % plot data
 K = unique(I)';
 color = 'bgrm';
@@ -31,6 +35,7 @@ end
 plot(Theta(1,:), Theta(2,:), 'k+');
 hold off;
 title('Fuzzy c-means clustering');
+
 % plot distortion
 figure;
 plot(distortion);
