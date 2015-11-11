@@ -63,3 +63,14 @@ for j=1:N
     D(j) = sqrt(distance' * distance);
 end
 display(D);
+
+% plot
+figure; hold on;
+scatter(V2(1,:), V2(2,:), '^');
+labels = num2str((1:N)','d-%d');
+text(V2(1,:), V2(2,:), labels, 'horizontal','left', 'vertical','bottom');
+scatter(v_bar_5(1), v_bar_5(2), 'filled', 'd');
+text(v_bar_5(1), v_bar_5(2), 'd-5', 'horizontal','left', 'vertical','bottom');
+hold off;
+title('Plot of scaled document vectors in 2-dimension');
+legend('Command', 'Test document', 'Location', 'east');
