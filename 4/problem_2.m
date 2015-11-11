@@ -2,14 +2,14 @@
 docs = {'what is the time' 'what is the day' 'what time is the meeting' 'cancel the meeting'};
 words = {'what' 'is' 'the' 'time' 'day' 'meeting' 'cancel' 'when'};
 
-m = length(words);
+M = length(words);
 N = length(docs);
 
 % numbers of word_i occurred in doc_j
-C = zeros(m,N);
+C = zeros(M,N);
 % normalized entropy
-e = zeros(1,m);
-for i=1:m
+e = zeros(M,1);
+for i=1:M
     for j=1:N
         C(i,j) = sum( strcmp(strsplit(docs{j}), words{i}) );
     end
@@ -20,13 +20,14 @@ for i=1:m
 end
 
 % W matrix (words by documents)
-W = zeros(m, N);
+W = zeros(M, N);
 for j=1:N
     nj = length( strsplit(docs{j}) );
-    for i=1:m
+    for i=1:M
         W(i,j) =  (1-e(i)) * C(i,j)/nj;
     end
 end
+display(W);
 
 % SVD decomposition
 [U,S,V] = svd(W);
@@ -39,6 +40,26 @@ SR = diag( diag(S) );
 R = length(SR);
 % numbers of dimensions to keep
 k = 2;
-V_bar = SR*V(:,1:R)';
-V_bar_2 = V_bar(:,1:k);
-display(V_bar_2);
+V_bar = SR*V';
+V2 = V_bar(1:k,:);
+display(V2);
+
+% test with new document
+d5 = 'when is the meeting';
+w_d5 = strsplit(d5);
+nj = length( w_d5 );
+C_i5 = zeros(M,1);
+for i=1:M
+    C_i5(i) = sum( strcmp(w_d5, words{i}) );
+end
+w_i5 = (1-e).*(C_i5/nj);
+v_bar_5 = U(:,1:k)' * w_i5;
+display(v_bar_5);
+
+% compute distance from d5
+D = zeros(1,N);
+for j=1:N
+    distance = V2(:,j) - v_bar_5;
+    D(j) = sqrt(distance' * distance);
+end
+display(D);
