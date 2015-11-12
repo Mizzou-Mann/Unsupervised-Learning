@@ -31,13 +31,15 @@ display(W);
 
 % SVD decomposition
 [U,S,V] = svd(W);
-display(U);
-display(S);
-display(V);
 
 % scaled document vectors
 SR = diag( diag(S) );
 R = length(SR);
+U = U(:,1:R);
+
+display(U);
+display(SR);
+display(V);
 % numbers of dimensions to keep
 k = 2;
 V_bar = SR*V';
