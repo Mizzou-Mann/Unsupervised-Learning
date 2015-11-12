@@ -18,6 +18,9 @@ Qc = Pc_ij./(Pi*ones(1,2))./(Pc_j*ones(1,2))'; Qc(Qc==0) = 1;
 MI_a = sum( sum(Pa_ij .* log2(Qa)) );
 MI_b = sum( sum(Pb_ij .* log2(Qb)) );
 MI_c = sum( sum(Pc_ij .* log2(Qc)) );
+display(MI_a);
+display(MI_b);
+display(MI_c);
 
 % compute normalized mutual information (NMI)
 NMI_a = MI_a / sqrt(entropy(Pi)*entropy(Pa_j));

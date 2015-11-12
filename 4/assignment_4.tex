@@ -189,6 +189,35 @@ Hence the closest neighbors of d-5 rank from d-3, d-1, d-2 and d-4 sequentially.
 		\end{bmatrix}
 \end{equation}
 
+\paragraph{Problem 4.} In this experiment, we are going to evaluate the quality of clusters by computing the mutual information(MI) and normalized mutual information(NMI) by the following equations:
+
+\begin{equation}
+	MI = \sum_i \sum_j P_{ij} \log_2 \frac{P_{ij}}{P_iP_j}
+\end{equation}
+
+\begin{equation}
+	NMI = \frac{MI}{\sqrt{H(X)H(Y)}}
+\end{equation}
+
+where $P_{ij}$ is the probability of x being assigned to cluster j and it belongs to class i, $P_i$ is the probability of x belongs to class i, and $P_j$ is the probability of x being assigned to cluster j and $H$ is the entropy.
+
+\begin{equation}
+	H(X) = -\sum_i P_i \log_2 Pi
+\end{equation}
+
+Hence we obtain:
+
+\begin{center}
+    \begin{tabular}{ |c |c |c |c | }
+      \hline
+       & a & b & c \\ \hline
+       MI & 0.9799 & 0.4067 & 0.0718 \\ \hline
+       NMI & 1 & 0.4562 & 0.0733 \\ \hline
+    \end{tabular}
+\end{center}
+
+We observed that both MI and NMI provide accurate performance measurement for cluster quality evaluation. In cluster labels (a) case it proves that MI and NMI are indeed insensitive to cluster labeling name and yield the highest values among other cases. The cluster labels (b) has higher MI and NMI then cluster labels (c) since it makes only two clustering mistakes for $x_1$ and $x_2$ comparing four mistakes occurred in (c). This have shown that the higher the values of MI and NMI the better the clustering quality is.
+
 \newpage
 \subsection*{Appendix:}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{assignment_4.m}
