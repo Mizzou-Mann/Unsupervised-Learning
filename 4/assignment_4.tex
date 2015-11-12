@@ -146,6 +146,49 @@ Hence the closest neighbors of d-5 rank from d-3, d-1, d-2 and d-4 sequentially.
     \caption{Plot of scaled document vector in 2-dimension}
   \end{figure}
 
+\paragraph{Problem 3.} Given a Euclidean distance matrix of five data samples, we are going to use classical multidimensional scaling (MDS) algorithm to estimate the 2-D coordinates of the five data-points. In MDS we begin by squaring the elements of the Euclidean distance matrix then perform double centering on the squared distance matrix with $J = \mathbf{I}_n - \frac{1}{n}\mathbf{1}_n\mathbf{1}_n^T$ to obtain $B_\Delta = -\frac{1}{2}JD^{(2)}J$ then we carry out eigen decomposition of $B_\Delta = V\Lambda V^T$. We finally choose the two largest positive eigenvalues and their corresponding eigenvectors to form approximation for the five data samples by computing $\hat{X} = V_{+}\Lambda_{+}^{\frac{1}{2}}$.
+
+\paragraph{a)} The result of eigenvalue matrix $\Lambda_{+}$, eigenvector matrix $V_{+}$ and the estimated coordinates $\hat{X}$ are:
+
+\begin{equation}
+	\Lambda_{+} = \begin{bmatrix}
+			        4.0000   &      0 \\
+         			0  &  2.8000
+		\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	V_{+} = \begin{bmatrix}
+			    0.5000  & -0.4781 \\
+			    0.5000  &  0.1195 \\ 
+			   -0.0000  &  0.7171 \\
+			   -0.5000  &  0.1195 \\
+			   -0.5000  & -0.4781
+		\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+	\hat{X} = \begin{bmatrix}
+				    1.0000  & -0.8000 \\
+				    1.0000  &  0.2000 \\
+				   -0.0000  &  1.2000 \\
+				   -1.0000  &  0.2000 \\
+				   -1.0000  & -0.8000
+		\end{bmatrix}
+\end{equation}
+
+\paragraph{b)} To verify that the estimated data coordinates are centered we compute the mean of $\hat{X}$ and it in fact yield the values very close to zeros due to numerical computation precision bias. We also recover the Euclidean distance matrix from the projected data samples $\hat{X}$ and confirm the exact match with the original distance matrix.
+
+\begin{equation}
+	\hat{D} = \begin{bmatrix}
+		        0  &  1.0000  &  2.2361  &  2.2361  &  2.0000 \\
+			    1.0000  &       0  &  1.4142  &  2.0000  &  2.2361 \\
+			    2.2361  &  1.4142  &       0  &  1.4142  &  2.2361 \\
+			    2.2361  &  2.0000  &  1.4142  &       0  &  1.0000 \\
+			    2.0000  &  2.2361  &  2.2361  &  1.0000  &       0
+		\end{bmatrix}
+\end{equation}
+
 \newpage
 \subsection*{Appendix:}
 	\lstinputlisting[language=Matlab, title=\lstname, basicstyle=\footnotesize]{assignment_4.m}
